@@ -1,0 +1,89 @@
+/* Archivo: styles.css */
+
+/* Import de la fuente Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos del body */
+body {
+    background-image: url('../assets/img/background.jpeg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    padding: 20px;
+    position: relative;
+}
+
+/* KEYFRAMES para la animación */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Título principal */
+h1 {
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    margin-bottom: 20px;
+    /* Animación */
+    animation: fadeInUp 1s ease forwards;
+}
+
+/* Párrafos */
+p {
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    margin-top: 10px;
+    /* Animación con un leve retraso para aparecer después del h1 */
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 0.5s;
+}
+
+/* Imagen del conejo */
+.rabbit {
+    position: absolute;
+    bottom: 8vh; /* Ajuste para desktop */
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(100px, 25vw, 500px);
+    height: auto;
+}
+
+/* Estilos específicos para móviles */
+@media (max-width: 767px) {
+    h1 {
+        font-size: clamp(2rem, 6vw, 3.5rem);
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .rabbit {
+        width: 80%;
+        bottom: 10vh;
+        max-width: none;
+    }
+}

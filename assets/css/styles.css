@@ -1,0 +1,129 @@
+/* ------------------------------------------------
+   1) IMPORT DE FUENTE (OPCIONAL)
+-------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+/* ------------------------------------------------
+   2) RESET BÁSICO
+-------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ------------------------------------------------
+   3) ESTILOS BODY
+-------------------------------------------------- */
+body {
+    background-image: url('/assets/img/background.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    overflow: hidden; /* Evita scroll si algo se anima fuera de la vista */
+}
+
+/* ------------------------------------------------
+   4) ESTILOS PARA LOS TÍTULOS
+-------------------------------------------------- */
+
+/* Ambos títulos comparten el mismo estilo base */
+#coming-soon,
+#nativos-web {
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    position: absolute;
+    top: 40%;  /* Centrado vertical aproximado */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0; /* Inician ocultos */
+}
+
+/* ANIMACIÓN 1: "Coming Soon"
+   Duración total: 3.5s (más corta para no tardar tanto) */
+@keyframes fadeInUpThenOut {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(30px);
+    }
+    10% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    60% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(-30px);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(-30px);
+    }
+}
+#coming-soon {
+    animation: fadeInUpThenOut 3.5s ease-in-out forwards;
+    /* 
+       0-10% (0-0.35s): Fade In
+       10-50% (0.35s-1.75s): Visible
+       50-60% (1.75s-2.1s): Fade Out
+       60-100% (2.1s-3.5s): Oculto
+    */
+}
+
+/* ANIMACIÓN 2: "Nativos Web"
+   Duración 1.2s, empieza tras 3.5s (cuando “Coming Soon” termina) */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0);
+    }
+}
+#nativos-web {
+    animation: fadeInUp 1.2s ease-in-out forwards;
+    animation-delay: 3.5s; /* Inicia justo cuando termina la otra animación */
+}
+
+/* ------------------------------------------------
+   5) ESTILO PARA LA LIEBRE
+-------------------------------------------------- */
+.rabbit {
+    position: absolute;
+    bottom: 8vh; /* Ajuste para escritorio */
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(100px, 25vw, 500px);
+    height: auto;
+}
+
+/* ------------------------------------------------
+   6) MEDIA QUERIES PARA MÓVIL
+-------------------------------------------------- */
+@media (max-width: 767px) {
+    /* Ajustamos la posición vertical y tamaño para que no se desalineen */
+    #coming-soon,
+    #nativos-web {
+        top: 30%; /* Un poco más arriba en pantallas pequeñas */
+        font-size: clamp(1.8rem, 5vw, 3rem);
+    }
+
+    .rabbit {
+        width: 80%;
+        bottom: 10vh;
+        max-width: none;
+    }
+}
