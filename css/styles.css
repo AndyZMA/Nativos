@@ -1,0 +1,158 @@
+/* ------------------------------------------------
+   1) IMPORT DE FUENTE (OPCIONAL)
+-------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+/* ------------------------------------------------
+   2) RESET BÁSICO
+-------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ------------------------------------------------
+   3) ESTILOS DEL BODY
+-------------------------------------------------- */
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    overflow: hidden; /* Evita scroll si algo se anima fuera de la vista */
+}
+
+/* ------------------------------------------------
+   4) IMAGEN DE FONDO (Ahora en HTML)
+-------------------------------------------------- */
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1; /* Mantiene la imagen en el fondo */
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Hace que la imagen aparezca suavemente al cargarse */
+.background-image.loaded {
+    opacity: 1;
+}
+
+/* ------------------------------------------------
+   5) ESTILOS PARA LOS TÍTULOS
+-------------------------------------------------- */
+#coming-soon,
+#nativos-web {
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0; /* Inician ocultos */
+}
+
+/* ANIMACIÓN 1: "Coming Soon" */
+@keyframes fadeInUpThenOut {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(30px);
+    }
+    10% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0);
+    }
+    60% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(-30px);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(-30px);
+    }
+}
+#coming-soon {
+    animation: fadeInUpThenOut 3.5s ease-in-out forwards;
+}
+
+/* ANIMACIÓN 2: "Nativos Web" */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0);
+    }
+}
+#nativos-web {
+    animation: fadeInUp 1.2s ease-in-out forwards;
+    animation-delay: 3.5s;
+}
+
+/* ------------------------------------------------
+   6) ESTILO PARA LA LIEBRE
+-------------------------------------------------- */
+.rabbit {
+    position: absolute;
+    bottom: 8vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(100px, 25vw, 500px);
+    height: auto;
+}
+
+
+@keyframes jump {
+    0% { transform: translateX(-50%) translateY(0); }
+    30% { transform: translateX(-50%) translateY(-100px); } /* Salta hacia arriba */
+    50% { transform: translateX(-50%) translateY(-120px); } /* Punto más alto */
+    70% { transform: translateX(-50%) translateY(-100px); }
+    100% { transform: translateX(-50%) translateY(0); } /* Vuelve al suelo */
+}
+
+.rabbit {
+    position: absolute;
+    bottom: 8vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(100px, 25vw, 500px);
+    height: auto;
+}
+
+/* Se aplica la animación cuando se añade la clase "jumping" */
+.rabbit.jumping {
+    animation: jump 0.6s ease-in-out;
+}
+
+
+
+/* ------------------------------------------------
+   7) MEDIA QUERIES PARA MÓVIL
+-------------------------------------------------- */
+@media (max-width: 767px) {
+    #coming-soon,
+    #nativos-web {
+        top: 30%;
+        font-size: clamp(1.8rem, 5vw, 3rem);
+    }
+
+    .rabbit {
+        width: 80%;
+        bottom: 10vh;
+        max-width: none;
+    }
+}
