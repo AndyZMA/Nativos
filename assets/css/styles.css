@@ -13,14 +13,9 @@
 }
 
 /* ------------------------------------------------
-   3) ESTILOS BODY
+   3) ESTILOS DEL BODY
 -------------------------------------------------- */
 body {
-    background-image: url('/assets/img/background.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -31,24 +26,41 @@ body {
 }
 
 /* ------------------------------------------------
-   4) ESTILOS PARA LOS TÍTULOS
+   4) IMAGEN DE FONDO (Ahora en HTML)
 -------------------------------------------------- */
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1; /* Mantiene la imagen en el fondo */
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
 
-/* Ambos títulos comparten el mismo estilo base */
+/* Hace que la imagen aparezca suavemente al cargarse */
+.background-image.loaded {
+    opacity: 1;
+}
+
+/* ------------------------------------------------
+   5) ESTILOS PARA LOS TÍTULOS
+-------------------------------------------------- */
 #coming-soon,
 #nativos-web {
     color: #fff;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
     font-size: clamp(2.5rem, 8vw, 4.5rem);
     position: absolute;
-    top: 40%;  /* Centrado vertical aproximado */
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0; /* Inician ocultos */
 }
 
-/* ANIMACIÓN 1: "Coming Soon"
-   Duración total: 3.5s (más corta para no tardar tanto) */
+/* ANIMACIÓN 1: "Coming Soon" */
 @keyframes fadeInUpThenOut {
     0% {
         opacity: 0;
@@ -73,16 +85,9 @@ body {
 }
 #coming-soon {
     animation: fadeInUpThenOut 3.5s ease-in-out forwards;
-    /* 
-       0-10% (0-0.35s): Fade In
-       10-50% (0.35s-1.75s): Visible
-       50-60% (1.75s-2.1s): Fade Out
-       60-100% (2.1s-3.5s): Oculto
-    */
 }
 
-/* ANIMACIÓN 2: "Nativos Web"
-   Duración 1.2s, empieza tras 3.5s (cuando “Coming Soon” termina) */
+/* ANIMACIÓN 2: "Nativos Web" */
 @keyframes fadeInUp {
     0% {
         opacity: 0;
@@ -95,15 +100,15 @@ body {
 }
 #nativos-web {
     animation: fadeInUp 1.2s ease-in-out forwards;
-    animation-delay: 3.5s; /* Inicia justo cuando termina la otra animación */
+    animation-delay: 3.5s;
 }
 
 /* ------------------------------------------------
-   5) ESTILO PARA LA LIEBRE
+   6) ESTILO PARA LA LIEBRE
 -------------------------------------------------- */
 .rabbit {
     position: absolute;
-    bottom: 8vh; /* Ajuste para escritorio */
+    bottom: 8vh;
     left: 50%;
     transform: translateX(-50%);
     width: clamp(100px, 25vw, 500px);
@@ -111,13 +116,12 @@ body {
 }
 
 /* ------------------------------------------------
-   6) MEDIA QUERIES PARA MÓVIL
+   7) MEDIA QUERIES PARA MÓVIL
 -------------------------------------------------- */
 @media (max-width: 767px) {
-    /* Ajustamos la posición vertical y tamaño para que no se desalineen */
     #coming-soon,
     #nativos-web {
-        top: 30%; /* Un poco más arriba en pantallas pequeñas */
+        top: 30%;
         font-size: clamp(1.8rem, 5vw, 3rem);
     }
 
